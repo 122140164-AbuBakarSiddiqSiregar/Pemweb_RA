@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pendaftaran</title>
+
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(Resource/bg1.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        footer {
+            background-color: rgb(66, 66, 66);
+            color: white;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .formregister{
+            background-color: rgb(73, 73, 68);
+            color:aliceblue;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 50px;
+            border-radius: 36px;
+            width: 400px;
+            box-shadow: 0 14px 18px rgb(40, 40, 40);
+        }
+
+        #titleform{
+            text-align: center;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 7px 0px;
+            border-radius: 9px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: seagreen;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="formregister">
+        <h1 id="titleform">Form Pendaftaran</h1>
+        <form method="post" action="detail.html">
+            <label for="Email">Email</label><br>
+            <input type="text" id="email" name="email"><br><br>
+            <label for="name">Nama</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <label for=">address">Alamat</label><br>
+            <input type="text" id="address" name=">address"><br><br>
+            <label for="date">Tanggal lahir</label><br>
+            <input type="date" id="date" name="date"><br><br>
+            <label for="gender">Kelamin</label><br>
+            <select id="gender" name="gender">
+                <option value="male">Laki-laki</option>
+                <option value="female">Perempuan</option>
+            </select>
+            <input type="submit" value="Daftar">
+        </form>
+        </form>
+    </div>
+
+    <footer>
+        122140164_Abu Bakar Siddiq Siregar
+    </footer>
+</body>
+</html>
