@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ujian Pemrograman Web</title>
+
+  <script src="assets/js/script.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Form Input Data</h1>
+  <form id="dataForm" action="server/process.php" method="POST">
+    <label for="name">Nama:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="gender">Jenis Kelamin:</label>
+    <input type="radio" id="male" name="gender" value="Male">
+    <label for="male">Laki-laki</label>
+    <input type="radio" id="female" name="gender" value="Female">
+    <label for="female">Perempuan</label><br><br>
+
+    <label for="hobby">Hobi:</label>
+    <input type="checkbox" id="hobby1" name="hobby[]" value="Membaca">
+    <label for="hobby1">Membaca</label>
+    <input type="checkbox" id="hobby2" name="hobby[]" value="Olahraga">
+    <label for="hobby2">Olahraga</label><br><br>
+
+    <label for="country">Negara:</label>
+    <select id="country" name="country">
+      <option value="Indonesia">Indonesia</option>
+      <option value="Malaysia">Malaysia</option>
+      <option value="Singapore">Singapore</option>
+    </select><br><br>
+
+    <button type="button" id="submitButton">Submit</button>
+  </form>
+
+  <h2>Data yang Diterima</h2>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Jenis Kelamin</th>
+        <th>Hobi</th>
+        <th>Negara</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data akan dimasukkan di sini -->
+    </tbody>
+  </table>
+
+  <script>
+    // Fungsi untuk memuat data dari server
+    function loadUserData() {
+        fetch('server/view_user.php')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('dataTable').querySelector('tbody');
+                tableBody.innerHTML = ''; // Hapus isi tabel sebelumnya
+
+                data.forEach(user => {
+                    const newRow = tableBody.insertRow();
+                    newRow.innerHTML = `
+                        <td>${user.name}</td>
+                        <td>${user.gender}</td>
+                        <td>${user.hobbies}</td>
+                        <td>${user.country}</td>
+                    `;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Muat data pengguna saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', loadUserData);
+
+    // Tambahkan event listener ke form untuk memperbarui data setelah submit
+    const form = document.getElementById('dataForm');
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Mencegah pengiriman form default
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(() => {
+            form.reset();
+            loadUserData(); // Perbarui tabel dengan data baru
+            alert('Data berhasil disimpan!');
+        })
+        .catch(error => console.error('Error:', error));
+    });
+  </script>
+</body>
+</html>
